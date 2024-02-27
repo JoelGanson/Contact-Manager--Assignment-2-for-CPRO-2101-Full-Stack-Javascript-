@@ -22,4 +22,12 @@ mongoose
     console.log(error);
   });
 
-const x = "x";
+const contact_route = require("./routes/contact");
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/", contact_route);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

@@ -6,3 +6,5 @@ const Contact = require("../models/contactModel");
 
 router.post("/create", ContactController.createContact);
 router.put("/update", ContactController.updateContact);
+
+module.exports = router;
