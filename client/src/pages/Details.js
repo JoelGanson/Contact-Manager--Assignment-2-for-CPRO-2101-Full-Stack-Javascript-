@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import Return from "../components/Return";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import GetCategory from "../components/getCategory"
 
 export default function Details() {
   var id = useParams().id;
@@ -83,7 +84,7 @@ export default function Details() {
             
             <li class="row border p-3">
               <div class="col-sm-2">Category:</div>
-              <div class="col-sm">{contact.CategoryId}</div>
+              <div class="col-sm"><GetCategory/></div>
             </li>
 
             

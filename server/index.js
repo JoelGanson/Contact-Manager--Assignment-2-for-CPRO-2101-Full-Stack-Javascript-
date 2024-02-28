@@ -25,12 +25,15 @@ mongoose
   });
 
 const contact_route = require("./routes/contact");
+
+const category_route = require("./routes/category");
 app.use(express.urlencoded({ extended: true }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use("/", contact_route);
+app.use("/cat/", category_route);
 
 const PORT = process.env.PORT || 3020;
 app.listen(PORT, () => {
