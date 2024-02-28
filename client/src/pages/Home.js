@@ -7,7 +7,7 @@ export default function Home() {
       <center>
         <h2>Home</h2>
       </center>
-      <a>Add New Contact</a>
+      <a href="./Add">Add New Contact</a>
     </div>
   );
 }
