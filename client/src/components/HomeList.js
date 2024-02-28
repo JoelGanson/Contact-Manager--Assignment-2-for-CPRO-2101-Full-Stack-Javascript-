@@ -1,4 +1,5 @@
 import react, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 export default function HomeList() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -28,15 +29,35 @@ export default function HomeList() {
     return (
       <ul class="container">
         <li class="row" key="title">
-          <div class="col-sm-1">First Name</div>
-          <div class="col-sm-1">Last Name</div>
-        <hr/>
+          <div class="col-sm-1">
+            <strong>First Name</strong>
+          </div>
+          <div class="col-sm-1">
+            <strong>Last Name</strong>
+          </div>
+          <div class="col-sm-2">
+            <strong>Phone</strong>
+          </div>
+          <div class="col-sm-3">
+            <strong>Email</strong>
+          </div>
+          <div class="col-sm">
+            <strong>Category</strong>
+          </div>
+          <hr />
         </li>
         {contacts.map((contact) => (
           <li class="row" key={contact.id}>
-            <div class="col-sm-1">{contact.FirstName}</div>
-            <div class="col-sm-1">{contact.LastName}</div>
-            <hr/>
+            <div class="col-sm-1">
+              <Link to={"Details/" + contact._id}>{contact.FirstName}</Link>
+            </div>
+            <div class="col-sm-1">
+              <Link to={"Details/" + contact._id}>{contact.LastName}</Link>
+            </div>
+            <div class="col-sm-2">{contact.Phone}</div>
+            <div class="col-sm-3">{contact.Email}</div>
+            <div class="col-sm">{contact.CategoryId}</div>
+            <hr />
           </li>
         ))}
       </ul>
