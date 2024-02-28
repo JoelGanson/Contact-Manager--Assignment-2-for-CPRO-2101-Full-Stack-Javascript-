@@ -53,8 +53,34 @@ const getAllContacts = async (req, res) => {
   }
 };
 
+const getContactById = async (req, res) => {
+  try {
+    let contactId = req.body.contactId;
+    const contactData = await Contact.findById(contactId);
+    res
+      .status(200)
+      .send({ success: true, msg: "Contact Data", data: contactData });
+  } catch (error) {
+    res.status(404).send({ success: false, msge: error.message });
+  }
+};
+
+const deleteContact = async (req, res) => {
+  try {
+    let contactId = req.body.contactId;
+    const contactData = await Contact.findByIdAndDelete(contactId);
+    res
+      .status(200)
+      .send({ success: true, msg: "Contact Data", data: contactData });
+  } catch (error) {
+    res.status(404).send({ success: false, msge: error.message });
+  }
+};
+
 module.exports = {
   createContact,
   updateContact,
   getAllContacts,
+  getContactById,
+  deleteContact,
 };
