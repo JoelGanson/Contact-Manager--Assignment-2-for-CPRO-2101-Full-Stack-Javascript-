@@ -73,7 +73,7 @@ const deleteContact = async (req, res) => {
       .status(200)
       .send({ success: true, msg: "Contact Data", data: contactData });
   } catch (error) {
-    res.status(404).send({ success: false, msge: error.message });
+    res.status(403).send({ success: false, msge: error.message });
   }
 };
 
