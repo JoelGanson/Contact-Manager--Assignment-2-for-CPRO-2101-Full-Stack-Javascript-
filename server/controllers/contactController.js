@@ -56,7 +56,7 @@ const getAllContacts = async (req, res) => {
 const getContactById = async (req, res) => {
   try {
     let contactId = req.query.contactId;
-    console.log(contactId);
+    //console.log(contactId);
     const contactData = await Contact.findById(contactId);
     res
       .status(200)
