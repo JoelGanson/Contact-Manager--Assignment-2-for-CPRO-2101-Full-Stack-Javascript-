@@ -55,7 +55,8 @@ const getAllContacts = async (req, res) => {
 
 const getContactById = async (req, res) => {
   try {
-    let contactId = req.body.contactId;
+    let contactId = req.query.contactId;
+    console.log(contactId);
     const contactData = await Contact.findById(contactId);
     res
       .status(200)
@@ -67,7 +68,7 @@ const getContactById = async (req, res) => {
 
 const deleteContact = async (req, res) => {
   try {
-    let contactId = req.body.contactId;
+    let contactId = req.query.contactId;
     const contactData = await Contact.findByIdAndDelete(contactId);
     res
       .status(200)
