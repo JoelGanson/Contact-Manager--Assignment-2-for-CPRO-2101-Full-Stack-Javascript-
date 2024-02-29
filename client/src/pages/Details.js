@@ -1,10 +1,10 @@
 import Header from "../components/Header";
-import Return from "../components/Return";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import GetCategory from "../components/getCategory";
 
 export default function Details() {
+  const navigate = useNavigate();
   var id = useParams().id;
   //console.log(id);
   const [error, setError] = useState(null);
@@ -32,9 +32,7 @@ export default function Details() {
     return (
       <div>
         <Header />
-        <center>
-          <Return />
-        </center>
+        <center></center>
         <div class="container">
           <h2>Contact Details</h2>
           Error: {error.message}
@@ -45,9 +43,7 @@ export default function Details() {
     return (
       <div>
         <Header />
-        <center>
-          <Return />
-        </center>
+        <center></center>
         <div class="container">
           <h2>Contact Details</h2>
           Loading...
@@ -58,9 +54,7 @@ export default function Details() {
     return (
       <div>
         <Header />
-        <center>
-          <Return />
-        </center>
+        <center></center>
         <div class="container ">
           <h2>Contact Details</h2>
           <ul>
@@ -98,6 +92,13 @@ export default function Details() {
               <div class="col-sm">{contact.createdAt}</div>
             </li>
           </ul>
+
+          <button type="button" onClick={() => navigate("/edit/" + id)}>
+            Edit
+          </button>
+          <button type="button" onClick={() => navigate("/")}>
+            Return To Home
+          </button>
         </div>
       </div>
     );

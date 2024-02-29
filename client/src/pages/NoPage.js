@@ -1,7 +1,8 @@
 import Header from "../components/Header";
-import Return from "../components/Return";
+import { useNavigate } from "react-router-dom";
 
 export default function NoPage() {
+    const navigate = useNavigate();
   return (
     <div>
       <Header />
@@ -11,8 +12,9 @@ export default function NoPage() {
           The page you were looking for was not found. Please try a different
           page or come back later.
         </p>
-        <Return />
       </center>
+      <button type="button" onClick={() => navigate("/")}>Return to Home
+        </button>
     </div>
   );
 }
