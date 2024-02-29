@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import GetCategory from "../components/getCategory";
+
 export default function HomeList() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -56,7 +58,9 @@ export default function HomeList() {
             </div>
             <div class="col-sm-2">{contact.Phone}</div>
             <div class="col-sm-3">{contact.Email}</div>
-            <div class="col-sm">{contact.CategoryId}</div>
+            <div class="col-sm">
+              <GetCategory id={contact.CategoryId} />
+            </div>
             <hr />
           </li>
         ))}
