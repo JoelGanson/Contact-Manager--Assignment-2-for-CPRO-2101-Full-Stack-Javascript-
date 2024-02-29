@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 
-export default function HomeList() {
-  var id = useParams().id;
+export default function HomeList(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [contacts, setContacts] = useState([]);
+  const [category, setCategory] = useState([]);
+  //console.log("id:");
+  //console.log(props);
 
   useEffect(() => {
-    fetch("http://localhost:3020/cat/category?=" + id)
+    fetch("http://localhost:3020/cat/category?categoryId=" + props.id)
       .then((res) => res.json())
       .then(
         (data) => {
           setIsLoaded(true);
-          setContacts(data.data);
+          setCategory(data.data);
         },
         (error) => {
           setIsLoaded(true);
@@ -21,13 +21,15 @@ export default function HomeList() {
         }
       );
   }, []);
+  //   console.log("successful response:");
+  //   console.log(category);
+  //   console.log("error response:");
+  //   console.log(error);
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
-    //console.log(contacts);
-
-    return <span></span>;
+    return <span>{category.categoryName}</span>;
   }
 }
