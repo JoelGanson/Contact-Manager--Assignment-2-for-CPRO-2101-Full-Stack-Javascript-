@@ -210,7 +210,7 @@ export default function AddOrEdit(props) {
               Select one (Required):
             </option>
             {categories.map((category) => (
-              <option value={category._Id}>{category.categoryName}</option>
+              <option value={category._id}>{category.categoryName}</option>
             ))}
           </select>
           <div class="valid-feedback">Good to go!</div>
