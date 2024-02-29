@@ -4,13 +4,16 @@ import { useParams, useNavigate } from "react-router-dom";
 import GetCategory from "../components/getCategory";
 
 export default function Details() {
+  // A hook for navigating back home, to the edit page, or to the delete page
   const navigate = useNavigate();
+  // The id of the contact being viewed
   var id = useParams().id;
   //console.log(id);
+  // Hooks for storing the data of the contact we fetch
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [contact, setContact] = useState([]);
-
+  // Fetch the contact, passing the id in as a parameter
   useEffect(() => {
     fetch("http://localhost:3020/contact?contactId=" + id)
       .then((res) => res.json())
@@ -28,6 +31,9 @@ export default function Details() {
 
   //console.log(contact);
   //console.log(error);
+  // Decide what we should display based on if an error happened, if the info's still loading, or if it's loaded
+  // I've added return home buttons to all of them
+  // The loaded version has buttons to send the user to the edit or delete pages too
   if (error) {
     return (
       <div>
@@ -37,6 +43,9 @@ export default function Details() {
           <h2>Contact Details</h2>
           Error: {error.message}
         </div>
+        <button type="button" onClick={() => navigate("/")}>
+          Return To Home
+        </button>
       </div>
     );
   } else if (!isLoaded) {
@@ -48,6 +57,9 @@ export default function Details() {
           <h2>Contact Details</h2>
           Loading...
         </div>
+        <button type="button" onClick={() => navigate("/")}>
+          Return To Home
+        </button>
       </div>
     );
   } else {
@@ -95,6 +107,9 @@ export default function Details() {
 
           <button type="button" onClick={() => navigate("/edit/" + id)}>
             Edit
+          </button>
+          <button type="button" onClick={() => navigate("/delete/" + id)}>
+            Delete
           </button>
           <button type="button" onClick={() => navigate("/")}>
             Return To Home

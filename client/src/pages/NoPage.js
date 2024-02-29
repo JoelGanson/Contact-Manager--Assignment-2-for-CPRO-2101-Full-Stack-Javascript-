@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 
 export default function NoPage() {
+    // A hook that lets the Return to Home button function
     const navigate = useNavigate();
   return (
     <div>

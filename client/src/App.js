@@ -12,10 +12,10 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/details/:id" element={<Details/>} />
+          <Route path="/details/:id" element={<Details />} />
           <Route path="/add" element={<AddOrEdit />} />
           <Route path="/edit/:id" element={<AddOrEdit />} />
-          <Route path="/delete" element={<ConfirmDeletion />} />
+          <Route path="/delete/:id" element={<ConfirmDeletion />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </BrowserRouter>

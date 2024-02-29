@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import GetCategory from "../components/getCategory";
 
 export default function HomeList() {
+  // Hooks for loading data into when we fetch contacts
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [contacts, setContacts] = useState([]);
-
+  // Fetches all the contacts
   useEffect(() => {
     fetch("http://localhost:3020/allcontacts")
       .then((res) => res.json())
@@ -21,6 +22,7 @@ export default function HomeList() {
         }
       );
   }, []);
+  // Determine what to return based on if the contacts have loaded or not
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
