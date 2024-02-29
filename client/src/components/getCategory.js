@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function getCategory(props) {
+export default function GetCategory(props) {
   // Hooks for loading in our category
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);

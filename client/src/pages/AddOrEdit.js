@@ -78,7 +78,7 @@ export default function AddOrEdit(props) {
     method = "POST";
     title = "Add New";
     action = "http://localhost:3020/create";
-    desitination = "/";
+    destination = "/";
   }
 
   // When the user types something into one of the input fields, update the coresponding variables
@@ -227,7 +227,7 @@ export default function AddOrEdit(props) {
         </div>
         <button type="submit">Submit</button>
         <span> </span>
-        <button type="button" onClick={() => navigate(desitination)}>
+        <button type="button" onClick={() => navigate(destination)}>
           Cancel
         </button>
       </form>
