@@ -3,10 +3,24 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function AddOrEdit(props) {
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({
+    FirstName: defaultFirstName,
+    LastName: defaultLastName,
+    Phone: defaultPhone,
+    Email: defaultEmail,
+    CategoryId: defaultCategoryId,
+    Organization: defaultOrganization,
+  });
+
   var id = useParams().id;
   //console.log(id);
   var title, action, hiddenField, method;
+  var defaultFirstName,
+    defaultLastName,
+    defaultPhone,
+    defaultEmail,
+    defaultCategoryId,
+    defaultOrganization = "";
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -19,15 +33,18 @@ export default function AddOrEdit(props) {
         (data) => {
           setIsLoaded(true);
           setContact(data.data);
-          console.log(data.data)
-          setInputs({ ...inputs, FirstName: data.data.FirstName });
-          setInputs({ ...inputs, LastName: data.data.LastName });
-          setInputs({ ...inputs, Phone: data.data.Phone });
-          setInputs({ ...inputs, Email: data.data.Email });
-          setInputs({ ...inputs, CategoryId: data.data.CategoryId });
-          setInputs({ ...inputs, Organization: data.data.Organization });
-          console.log("inputs:")
-          console.log(inputs);
+          //   console.log(data.data);
+          setInputs({
+            ...inputs,
+            FirstName: data.data.FirstName,
+            LastName: data.data.LastName,
+            Phone: data.data.Phone,
+            Email: data.data.Email,
+            CategoryId: data.data.CategoryId,
+            Organization: data.data.Organization,
+          });
+          //   console.log("inputs:")
+          //   console.log(inputs)
         },
         (error) => {
           setIsLoaded(true);
@@ -60,7 +77,6 @@ export default function AddOrEdit(props) {
     const name = event.target.name;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
-    console.log(inputs)
   };
 
   const handleSubmit = (event) => {
@@ -91,7 +107,7 @@ export default function AddOrEdit(props) {
             name="FirstName"
             type="text"
             class="form-control"
-            value={inputs.firstName}
+            value={inputs.FirstName}
             onChange={handleChange}
             required
           ></input>
@@ -107,7 +123,7 @@ export default function AddOrEdit(props) {
             name="LastName"
             type="text"
             class="form-control"
-            value={inputs.lastName}
+            value={inputs.LastName}
             onChange={handleChange}
             required
           ></input>
@@ -123,7 +139,7 @@ export default function AddOrEdit(props) {
             name="Phone"
             type="text"
             class="form-control"
-            value={inputs.phone}
+            value={inputs.Phone}
             onChange={handleChange}
             required
           ></input>
@@ -139,7 +155,7 @@ export default function AddOrEdit(props) {
             name="Email"
             type="text"
             class="form-control"
-            value={inputs.email}
+            value={inputs.Email}
             onChange={handleChange}
             required
           ></input>
@@ -155,7 +171,7 @@ export default function AddOrEdit(props) {
             name="CategoryId"
             type=""
             class="form-control"
-            value={inputs.categoryId}
+            value={inputs.CategoryId}
             onChange={handleChange}
             required
           >
@@ -178,7 +194,7 @@ export default function AddOrEdit(props) {
             name="Organization"
             type="text"
             class="form-control"
-            value={inputs.organization}
+            value={inputs.Organization}
             onChange={handleChange}
           ></input>
           <div class="valid-feedback">Optional</div>
