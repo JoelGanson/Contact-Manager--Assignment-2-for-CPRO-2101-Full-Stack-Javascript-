@@ -20,7 +20,7 @@ export default function AddOrEdit(props) {
   var id = useParams().id;
   //console.log(id);
   // Placeholders, to be defined later once we check if id has been defined
-  var title, action, method;
+  var title, action, method, destination;
   // A hook for navigating to other pages
   const navigate = useNavigate();
   // Hooks for getting the contact info of an existing contact to edit
@@ -67,15 +67,18 @@ export default function AddOrEdit(props) {
   // Title displays at the top of the page
   // action determines which API to use
   // method determines what category of api action this is, as if being sent through Postman
+  // Destination is where the user should be sent if they click cancel, and in the case of editing that's back to the details page, elsewise home
   if (id) {
     title = "Editting";
     action = "http://localhost:3020/update";
     method = "PUT";
     successMessage = "Contact succesfully updated!";
+    destination = "/Details/" + id;
   } else {
     method = "POST";
     title = "Add New";
     action = "http://localhost:3020/create";
+    desitination = "/";
   }
 
   // When the user types something into one of the input fields, update the coresponding variables
@@ -224,7 +227,7 @@ export default function AddOrEdit(props) {
         </div>
         <button type="submit">Submit</button>
         <span> </span>
-        <button type="button" onClick={() => navigate("/")}>
+        <button type="button" onClick={() => navigate(desitination)}>
           Cancel
         </button>
       </form>
