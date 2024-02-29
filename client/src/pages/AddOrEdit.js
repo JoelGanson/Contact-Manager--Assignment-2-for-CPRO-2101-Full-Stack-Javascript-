@@ -63,6 +63,22 @@ export default function AddOrEdit(props) {
     }
   }, []);
 
+  // Hooks for loading in our categories
+  const [categories, setCategories] = useState([]);
+  // Load the category by fetching it.
+  useEffect(() => {
+    fetch("http://localhost:3020/cat/allCategories")
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          setCategories(data.data);
+        },
+        (error) => {
+          setError(error);
+        }
+      );
+  }, []);
+
   // Check if we're editing, or creating a new contact using the falsey/truthy method
   // Title displays at the top of the page
   // action determines which API to use
@@ -193,10 +209,9 @@ export default function AddOrEdit(props) {
             <option selected disabled value="">
               Select one (Required):
             </option>
-            <option value="65dfc5381e21c2065d97a0a5">Friend</option>
-            <option value="65e00babc30f45fb049bd84b">Family</option>
-            <option value="65dfc5421e21c2065d97a0a7">Work</option>
-            <option value="65dfc52e1e21c2065d97a0a3">Self</option>
+            {categories.map((category) => (
+              <option value={category._Id}>{category.categoryName}</option>
+            ))}
           </select>
           <div class="valid-feedback">Good to go!</div>
           <div class="invalid-feedback">Please select an option</div>
