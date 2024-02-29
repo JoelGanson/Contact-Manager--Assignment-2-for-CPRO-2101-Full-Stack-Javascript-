@@ -4,69 +4,59 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export default function AddOrEdit(props) {
   const [inputs, setInputs] = useState({
-    FirstName: defaultFirstName,
-    LastName: defaultLastName,
-    Phone: defaultPhone,
-    Email: defaultEmail,
-    CategoryId: defaultCategoryId,
-    Organization: defaultOrganization,
+    FirstName: "",
+    LastName: "",
+    Phone: "",
+    Email: "",
+    CategoryId: "",
+    Organization: "",
+    contactId: "",
   });
 
   var id = useParams().id;
   //console.log(id);
-  var title, action, hiddenField, method;
-  var defaultFirstName,
-    defaultLastName,
-    defaultPhone,
-    defaultEmail,
-    defaultCategoryId,
-    defaultOrganization = "";
+  var title, action, method;
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [contact, setContact] = useState([]);
+  var successMessage = "Contact succesfully added!";
 
   useEffect(() => {
-    fetch("http://localhost:3020/contact?contactId=" + id)
-      .then((res) => res.json())
-      .then(
-        (data) => {
-          setIsLoaded(true);
-          setContact(data.data);
-          //   console.log(data.data);
-          setInputs({
-            ...inputs,
-            FirstName: data.data.FirstName,
-            LastName: data.data.LastName,
-            Phone: data.data.Phone,
-            Email: data.data.Email,
-            CategoryId: data.data.CategoryId,
-            Organization: data.data.Organization,
-          });
-          //   console.log("inputs:")
-          //   console.log(inputs)
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
+    if (id) {
+      fetch("http://localhost:3020/contact?contactId=" + id)
+        .then((res) => res.json())
+        .then(
+          (data) => {
+            setIsLoaded(true);
+            setContact(data.data);
+            //   console.log(data.data);
+            setInputs({
+              ...inputs,
+              FirstName: data.data.FirstName,
+              LastName: data.data.LastName,
+              Phone: data.data.Phone,
+              Email: data.data.Email,
+              CategoryId: data.data.CategoryId,
+              Organization: data.data.Organization,
+              contactId: id,
+            });
+            //   console.log("inputs:")
+            //   console.log(inputs)
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+    }
   }, []);
 
-  if (contact) {
+  if (id) {
     title = "Editting";
     action = "http://localhost:3020/update";
     method = "PUT";
-    hiddenField = (
-      <input
-        type="hidden"
-        id="contactId"
-        name="contactId"
-        defaultValue={id}
-        value={inputs.contactID}
-        readOnly
-      ></input>
-    );
+    successMessage = "Contact succesfully updated!";
   } else {
     method = "POST";
     title = "Add New";
@@ -86,8 +76,9 @@ export default function AddOrEdit(props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputs),
     };
+    console.log(requestOptions);
     fetch(action, requestOptions);
-    alert("Contact succesfully added!");
+    alert(successMessage);
     navigate("/");
   };
 
@@ -199,7 +190,16 @@ export default function AddOrEdit(props) {
           ></input>
           <div class="valid-feedback">Optional</div>
         </div>
-        {hiddenField}
+        <div>
+          <input
+            type="hidden"
+            id="contactId"
+            name="contactId"
+            defaultValue={id}
+            value={inputs.ContactID}
+            readOnly
+          ></input>
+        </div>
         <button type="submit">Submit</button>
         <span> </span>
         <button type="button" onClick={() => navigate("/")}>
